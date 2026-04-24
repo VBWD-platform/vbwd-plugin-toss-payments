@@ -95,9 +95,7 @@ class TossPaymentsPlugin(PaymentProviderPlugin):
                 sandbox=config.get("sandbox", True),
             ),
             client_key=config.get(f"{prefix}client_key", ""),
-            api_url=config.get(
-                f"{prefix}api_url", DEFAULT_CONFIG[f"{prefix}api_url"]
-            ),
+            api_url=config.get(f"{prefix}api_url", DEFAULT_CONFIG[f"{prefix}api_url"]),
         )
 
     def create_payment_intent(
@@ -113,9 +111,7 @@ class TossPaymentsPlugin(PaymentProviderPlugin):
             return PaymentResult(
                 success=False,
                 status=PaymentStatus.FAILED,
-                error_message=(
-                    f"Toss Payments supports KRW only, got {currency}"
-                ),
+                error_message=(f"Toss Payments supports KRW only, got {currency}"),
             )
         if int(amount) != amount:
             return PaymentResult(
@@ -140,18 +136,14 @@ class TossPaymentsPlugin(PaymentProviderPlugin):
         return PaymentResult(
             success=False,
             status=PaymentStatus.FAILED,
-            error_message=(
-                "Toss captures via payment/confirm on the return URL"
-            ),
+            error_message=("Toss captures via payment/confirm on the return URL"),
         )
 
     def release_authorization(self, payment_id: str) -> PaymentResult:
         return PaymentResult(
             success=False,
             status=PaymentStatus.FAILED,
-            error_message=(
-                "Toss does not expose authorization release via preference"
-            ),
+            error_message=("Toss does not expose authorization release via preference"),
         )
 
     def process_payment(
@@ -170,9 +162,7 @@ class TossPaymentsPlugin(PaymentProviderPlugin):
         self, transaction_id: str, amount: Optional[Decimal] = None
     ) -> PaymentResult:
         adapter = self._get_adapter()
-        response = adapter.cancel_payment(
-            payment_key=transaction_id, amount=amount
-        )
+        response = adapter.cancel_payment(payment_key=transaction_id, amount=amount)
         if not response.success:
             return PaymentResult(
                 success=False,

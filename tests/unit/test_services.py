@@ -49,7 +49,9 @@ class TestHashIdentifier:
 class TestPaymentService:
     def test_record_payment_confirmed(self):
         session = MagicMock()
-        session.query.return_value.filter_by.return_value.one_or_none.return_value = None
+        session.query.return_value.filter_by.return_value.one_or_none.return_value = (
+            None
+        )
         service = TossPaymentService(session=session)
 
         payment = service.record_payment_confirmed(
@@ -69,7 +71,9 @@ class TestPaymentService:
         existing.status = "completed"
         existing.last_provider_status = "DONE"
         session = MagicMock()
-        session.query.return_value.filter_by.return_value.one_or_none.return_value = existing
+        session.query.return_value.filter_by.return_value.one_or_none.return_value = (
+            existing
+        )
 
         service = TossPaymentService(session=session)
         service.apply_provider_update("INV-1", {"status": "DONE"})
@@ -118,14 +122,10 @@ class TestWebhookHandler:
 
     def test_accepts_orderId_camelCase(self):
         svc = MagicMock()
-        TossWebhookHandler(service=svc).handle(
-            {"orderId": "INV-1", "status": "DONE"}
-        )
+        TossWebhookHandler(service=svc).handle({"orderId": "INV-1", "status": "DONE"})
         svc.apply_provider_update.assert_called_once()
 
     def test_accepts_snake_case_alias(self):
         svc = MagicMock()
-        TossWebhookHandler(service=svc).handle(
-            {"order_id": "INV-1", "status": "DONE"}
-        )
+        TossWebhookHandler(service=svc).handle({"order_id": "INV-1", "status": "DONE"})
         svc.apply_provider_update.assert_called_once()

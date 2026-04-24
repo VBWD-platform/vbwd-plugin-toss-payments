@@ -85,9 +85,7 @@ class TossPaymentService:
 
     def _get_or_create(self, order_id: str) -> TossPayment:
         payment = (
-            self._session.query(TossPayment)
-            .filter_by(order_id=order_id)
-            .one_or_none()
+            self._session.query(TossPayment).filter_by(order_id=order_id).one_or_none()
         )
         if payment is None:
             payment = TossPayment(
@@ -119,8 +117,7 @@ class TossCashReceiptService:
     ) -> TossCashReceipt:
         if identifier_type not in self.ALLOWED_IDENTIFIER_TYPES:
             raise ValueError(
-                f"identifier_type must be one of "
-                f"{self.ALLOWED_IDENTIFIER_TYPES}"
+                f"identifier_type must be one of " f"{self.ALLOWED_IDENTIFIER_TYPES}"
             )
         if receipt_type not in self.ALLOWED_RECEIPT_TYPES:
             raise ValueError(

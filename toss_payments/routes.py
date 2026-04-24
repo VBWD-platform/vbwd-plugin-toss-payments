@@ -68,9 +68,7 @@ def get_status(order_id: str):
 
     from plugins.toss_payments.toss_payments.models import TossPayment
 
-    payment = (
-        db.session.query(TossPayment).filter_by(order_id=order_id).one_or_none()
-    )
+    payment = db.session.query(TossPayment).filter_by(order_id=order_id).one_or_none()
     if payment is None:
         return jsonify({"error": "not found"}), 404
 
@@ -140,9 +138,7 @@ def refund(order_id: str):
 
     from plugins.toss_payments.toss_payments.models import TossPayment
 
-    payment = (
-        db.session.query(TossPayment).filter_by(order_id=order_id).one_or_none()
-    )
+    payment = db.session.query(TossPayment).filter_by(order_id=order_id).one_or_none()
     if payment is None or not payment.payment_key:
         return jsonify({"error": "not found"}), 404
 

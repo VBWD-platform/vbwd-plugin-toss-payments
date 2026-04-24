@@ -8,9 +8,7 @@ from plugins.toss_payments.toss_payments.models import TossPayment
 
 def populate_db() -> None:
     existing = (
-        db.session.query(TossPayment)
-        .filter_by(order_id="DEMO-TOSS-0001")
-        .one_or_none()
+        db.session.query(TossPayment).filter_by(order_id="DEMO-TOSS-0001").one_or_none()
     )
     if existing is not None:
         return

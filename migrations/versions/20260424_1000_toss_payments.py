@@ -29,12 +29,26 @@ def upgrade() -> None:
         sa.Column("payment_key", sa.String(length=128), nullable=True),
         sa.Column("method", sa.String(length=32), nullable=True),
         sa.Column("amount", sa.Numeric(14, 0), nullable=False),
-        sa.Column("currency", sa.String(length=3), nullable=False, server_default="KRW"),
-        sa.Column("status", sa.String(length=24), nullable=False, server_default="pending"),
+        sa.Column(
+            "currency", sa.String(length=3), nullable=False, server_default="KRW"
+        ),
+        sa.Column(
+            "status", sa.String(length=24), nullable=False, server_default="pending"
+        ),
         sa.Column("last_provider_status", sa.String(length=32), nullable=True),
         sa.Column("extra_data", sa.JSON(), nullable=True),
-        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
-        sa.Column("updated_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("now()"),
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("now()"),
+        ),
     )
     op.create_index(
         "ix_toss_payments_payment_key",
@@ -56,8 +70,15 @@ def upgrade() -> None:
         sa.Column("identifier_type", sa.String(length=16), nullable=False),
         sa.Column("identifier_hash", sa.String(length=64), nullable=False),
         sa.Column("receipt_type", sa.String(length=16), nullable=False),
-        sa.Column("status", sa.String(length=16), nullable=False, server_default="issued"),
-        sa.Column("issued_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
+        sa.Column(
+            "status", sa.String(length=16), nullable=False, server_default="issued"
+        ),
+        sa.Column(
+            "issued_at",
+            sa.DateTime(timezone=True),
+            nullable=False,
+            server_default=sa.text("now()"),
+        ),
         sa.Column("cancelled_at", sa.DateTime(timezone=True), nullable=True),
     )
     op.create_index(
