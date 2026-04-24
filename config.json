@@ -1,0 +1,13 @@
+{
+  "sandbox": { "type": "boolean", "default": true, "description": "Use Toss sandbox" },
+  "test_client_key": { "type": "string", "default": "", "description": "Toss sandbox client key (widget)" },
+  "test_secret_key": { "type": "string", "default": "", "description": "Toss sandbox secret key (Basic auth)" },
+  "test_api_url": { "type": "string", "default": "https://api.tosspayments.com/v1", "description": "Toss API base URL" },
+  "live_client_key": { "type": "string", "default": "", "description": "Toss live client key" },
+  "live_secret_key": { "type": "string", "default": "", "description": "Toss live secret key" },
+  "live_api_url": { "type": "string", "default": "https://api.tosspayments.com/v1", "description": "Toss API base URL" },
+  "enabled_methods": { "type": "array", "default": ["CARD", "KAKAOPAY", "NAVERPAY", "SAMSUNGPAY", "TRANSFER"], "description": "Payment methods to expose in the widget" },
+  "currency": { "type": "string", "default": "KRW", "description": "Only KRW is supported" },
+  "cash_receipt_enabled": { "type": "boolean", "default": true, "description": "Surface cash-receipt (현금영수증) issuance UI" },
+  "tax_invoice_enabled": { "type": "boolean", "default": false, "description": "Tax-invoice integration (requires separate NTS provider)" }
+}
