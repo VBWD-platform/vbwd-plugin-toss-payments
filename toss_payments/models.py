@@ -4,9 +4,10 @@ from datetime import datetime, timezone
 from sqlalchemy import Column, DateTime, Numeric, String
 
 from vbwd.extensions import db
+from vbwd.models.base import TzAwareTimestampMixin
 
 
-class TossPayment(db.Model):
+class TossPayment(TzAwareTimestampMixin, db.Model):
     __tablename__ = "toss_payments"
 
     id = Column(
@@ -22,17 +23,7 @@ class TossPayment(db.Model):
     status = Column(String(24), nullable=False, default="pending")
     last_provider_status = Column(String(32), nullable=True)
     extra_data = Column(db.JSON, nullable=True)
-    created_at = Column(
-        DateTime(timezone=True),
-        nullable=False,
-        default=lambda: datetime.now(timezone.utc),
-    )
-    updated_at = Column(
-        DateTime(timezone=True),
-        nullable=False,
-        default=lambda: datetime.now(timezone.utc),
-        onupdate=lambda: datetime.now(timezone.utc),
-    )
+    # created_at / updated_at provided by TzAwareTimestampMixin (S20).
 
     def to_dict(self) -> dict:
         return {
