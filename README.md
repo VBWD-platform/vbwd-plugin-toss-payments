@@ -27,7 +27,7 @@ issuance and then forgotten; only SHA-256 hash is persisted.
 ## Database
 
 - `toss_payments` — payment record per order_id.
-- `toss_cash_receipts` — receipt ledger with identifier hash only.
+- `toss_payments_cash_receipts` — receipt ledger with identifier hash only.
 
 ## Frontend bundles
 

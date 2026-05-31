@@ -42,7 +42,7 @@ class TossPayment(TzAwareTimestampMixin, db.Model):
 
 
 class TossCashReceipt(db.Model):
-    __tablename__ = "toss_cash_receipts"
+    __tablename__ = "toss_payments_cash_receipts"
 
     id = Column(
         db.UUID,
