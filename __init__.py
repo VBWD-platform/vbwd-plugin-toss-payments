@@ -39,7 +39,7 @@ class TossPaymentsPlugin(PaymentProviderPlugin):
     def metadata(self) -> PluginMetadata:
         return PluginMetadata(
             name="toss_payments",
-            version="1.0.0",
+            version="26.6",
             author="VBWD Team",
             description=(
                 "Toss Payments (Korea) — cards + KakaoPay + Naver Pay + "
