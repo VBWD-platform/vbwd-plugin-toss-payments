@@ -3,7 +3,7 @@ from typing import Optional, Dict, Any, TYPE_CHECKING
 from decimal import Decimal
 from uuid import UUID
 
-from vbwd.plugins.base import PluginMetadata
+from vbwd.plugins.base import PluginMetadata, PublicRouteDeclaration
 from vbwd.plugins.payment_provider import (
     PaymentProviderPlugin,
     PaymentResult,
@@ -54,6 +54,14 @@ class TossPaymentsPlugin(PaymentProviderPlugin):
         if config:
             merged.update(config)
         super().initialize(merged)
+
+    def declare_public_routes(self) -> PublicRouteDeclaration:
+        """Public Toss Payments provider webhook (verified by provider signature)."""
+        return PublicRouteDeclaration(
+            mutation={
+                "/api/v1/plugins/toss-payments/webhooks": "Toss Payments webhook; verified by provider signature.",
+            },
+        )
 
     def get_blueprint(self) -> Optional["Blueprint"]:
         from plugins.toss_payments.toss_payments.routes import toss_plugin_bp
